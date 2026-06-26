@@ -1,0 +1,581 @@
+/* ============================================================
+   LAYO BIRTHDAY — STYLE (BLACK + PINK)
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #080808;
+  --surface: #101010;
+  --pink: #f472b6;
+  --pink-deep: #db2777;
+  --pink-glow: rgba(244, 114, 182, 0.15);
+  --text: #f5f0f0;
+  --muted: #5a5258;
+  --border: #1c1c1c;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   MUSIC INTRO
+   ============================================================ */
+
+.music-intro {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  z-index: 100;
+  animation: fadeIn 1s ease forwards;
+}
+
+.music-intro-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 360px;
+}
+
+.music-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.music-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(34px, 10vw, 52px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.music-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.btn-music {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 40px;
+  background: var(--pink);
+  border: none;
+  border-radius: 3px;
+  color: #080808;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 0 30px var(--pink-glow);
+  animation: pulsePink 2.5s ease-in-out infinite;
+}
+
+.btn-music:active {
+  transform: scale(0.97);
+  background: var(--pink-deep);
+}
+
+.play-icon {
+  font-size: 13px;
+}
+
+.music-skip {
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes pulsePink {
+  0%, 100% { box-shadow: 0 0 20px var(--pink-glow); }
+  50% { box-shadow: 0 0 40px rgba(244,114,182,0.3); }
+}
+
+/* ============================================================
+   STORY
+   ============================================================ */
+
+.story {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.story.hidden {
+  display: none;
+}
+
+/* Floating pink particles — ambient */
+.story::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(244,114,182,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 10% 90%, rgba(244,114,182,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   SCREENS
+   ============================================================ */
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.55s ease;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.screen.exiting {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.screen-inner {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.screen-inner.center {
+  align-items: center;
+  text-align: center;
+}
+
+/* ============================================================
+   FADE CHILDREN
+   ============================================================ */
+
+.fade-child {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.screen.active .fade-child:nth-child(1) { transition-delay: 0.08s;  opacity: 1; transform: none; }
+.screen.active .fade-child:nth-child(2) { transition-delay: 0.22s;  opacity: 1; transform: none; }
+.screen.active .fade-child:nth-child(3) { transition-delay: 0.36s;  opacity: 1; transform: none; }
+.screen.active .fade-child:nth-child(4) { transition-delay: 0.5s;   opacity: 1; transform: none; }
+.screen.active .fade-child:nth-child(5) { transition-delay: 0.64s;  opacity: 1; transform: none; }
+.screen.active .fade-child:nth-child(6) { transition-delay: 0.78s;  opacity: 1; transform: none; }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.display {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(38px, 11vw, 58px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.pink { color: var(--pink); }
+
+.chapter-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 7vw, 34px);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.story-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(20px, 5.5vw, 28px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.story-text.pink-text { color: var(--pink); }
+.story-text.muted     { color: var(--muted); font-style: normal; }
+.story-text.bold      { font-style: normal; font-weight: 700; font-size: clamp(28px, 8vw, 42px); }
+.story-text.large     { font-size: clamp(22px, 6.5vw, 34px); }
+
+.subtext {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.act-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+}
+
+.section-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(18px, 5vw, 22px);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--pink);
+}
+
+/* ============================================================
+   BUTTON
+   ============================================================ */
+
+.btn-next {
+  display: inline-block;
+  padding: 12px 34px;
+  background: transparent;
+  border: 1px solid var(--pink);
+  border-radius: 2px;
+  color: var(--pink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-next:active {
+  background: var(--pink);
+  color: #080808;
+  box-shadow: 0 0 20px var(--pink-glow);
+}
+
+/* ============================================================
+   SCREENSHOT CARDS
+   ============================================================ */
+
+.screenshot-card {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.screenshot-card img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+.screenshot-card img.media-tall {
+  max-height: 280px;
+}
+
+.video-card video {
+  width: 100%;
+  max-height: 300px;
+  display: block;
+  background: #000;
+}
+
+.caption {
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  padding: 12px 16px;
+}
+
+/* ============================================================
+   ACT 5 — LIKES LIST
+   ============================================================ */
+
+.likes-screen {
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.likes-inner {
+  gap: 20px;
+}
+
+.likes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.likes-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.screen.active .likes-list li:nth-child(1)  { transition-delay: 0.3s;  opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(2)  { transition-delay: 0.38s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(3)  { transition-delay: 0.46s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(4)  { transition-delay: 0.54s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(5)  { transition-delay: 0.62s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(6)  { transition-delay: 0.7s;  opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(7)  { transition-delay: 0.78s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(8)  { transition-delay: 0.86s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(9)  { transition-delay: 0.94s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(10) { transition-delay: 1.02s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(11) { transition-delay: 1.10s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(12) { transition-delay: 1.18s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(13) { transition-delay: 1.26s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(14) { transition-delay: 1.34s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(15) { transition-delay: 1.42s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(16) { transition-delay: 1.50s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(17) { transition-delay: 1.58s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(18) { transition-delay: 1.66s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(19) { transition-delay: 1.74s; opacity: 1; transform: none; }
+.screen.active .likes-list li:nth-child(20) { transition-delay: 1.82s; opacity: 1; transform: none; }
+
+.like-num {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--pink);
+  letter-spacing: 0.05em;
+  min-width: 22px;
+  flex-shrink: 0;
+}
+
+.like-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   REVEAL SCREEN
+   ============================================================ */
+
+.reveal-screen { background: var(--bg); }
+
+.reveal-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 10vw, 52px);
+  font-weight: 700;
+  color: var(--pink);
+  text-shadow: 0 0 40px rgba(244,114,182,0.3);
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.photo-slot {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================================
+   LETTER
+   ============================================================ */
+
+.screen.letter-screen {
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 52px;
+  padding-bottom: 52px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.letter {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #bdb5b5;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 22px;
+}
+
+.letter-sign {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--pink);
+  margin-top: 8px;
+}
+
+/* ============================================================
+   ENDING
+   ============================================================ */
+
+.ending-screen {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+}
+
+.ending-photo {
+  width: 100%;
+  max-width: 320px;
+}
+
+.ending-photo img {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 60px rgba(244,114,182,0.1);
+}
+
+.ending-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ending-main {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(20px, 5.5vw, 26px);
+  font-style: italic;
+  color: var(--text);
+}
+
+.ending-sub {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.ending-sign {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--pink);
+}
+
+/* ============================================================
+   CONFETTI
+   ============================================================ */
+
+.confetti-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -12px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg);    opacity: 1; }
+  100% { transform: translateY(110vh) rotate(600deg); opacity: 0; }
+}
+
+/* ============================================================
+   MISC ANIMATIONS
+   ============================================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-child,
+  .screen,
+  .confetti-piece,
+  .likes-list li,
+  .btn-music {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
